@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 public class AppMainTest {
     @Test
-    public void testSelenium() {
+    public void testSelenium() throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.selenium.dev/selenium/web/web-form.html");
@@ -17,12 +17,33 @@ public class AppMainTest {
 
         WebElement textBox = driver.findElement(By.name("my-text"));
         WebElement submitButton = driver.findElement(By.cssSelector("button"));
+        Thread.sleep(3000);
 
         textBox.sendKeys("Selenium");
         submitButton.click();
+        Thread.sleep(3000);
 
         WebElement message = driver.findElement(By.id("message"));
         Assert.assertEquals(message.getText(), "Received!");
+
+        Thread.sleep(3000);
+
+        driver.quit();
+    }
+
+    @Test
+    public void testGoogle() {
+
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.google.com");
+
+        WebElement comboBox = driver.findElement(By.xpath("/html/body/ntp-app//div/ntp-realbox//div/input"));
+        WebElement submitButton = driver.findElement(By.cssSelector("button"));
+
+        comboBox.sendKeys();
+        submitButton.click();
+
+
 
         driver.quit();
     }
